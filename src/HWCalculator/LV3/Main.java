@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        Calculator calc = new Calculator();     // Calculator 클래스 객체 생성
+        ArithmeticCalculator calc = new ArithmeticCalculator();     // Calculator 클래스 객체 생성
 
         double firstReal, secondReal;
         double result = 0;
