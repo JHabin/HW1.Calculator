@@ -2,12 +2,16 @@ package HWCalculator.LV3;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.regex.Pattern;
+
 
 public class ArithmeticCalculator {
+
     private Queue<Double> resqueue;
+
     public ArithmeticCalculator() {
         resqueue = new LinkedList<>();  //연산결과 저장하는 큐 생성
-        }
+    }
 
     public Queue<Double> getResult() { //getter 메서드
         return resqueue;
@@ -22,8 +26,9 @@ public class ArithmeticCalculator {
         resqueue.poll();    //가장 먼저 저장된 데이터 삭제
         System.out.println("삭제되었습니다.");
     }
-    public double calculate(char op, double firstReal, double secondReal){   //연산 수행
+    public double calculate(char op, double firstReal, double secondReal) throws BadDivideException {   //연산 수행
         double res = 0;
+
         // OperatorType을 참조하여 연산 수행
         switch (op) {
             case '+':
@@ -36,6 +41,8 @@ public class ArithmeticCalculator {
                 res = OperatorType.MULTIPLY.operate(firstReal, secondReal);
                 break;
             case '/':
+                if (secondReal == 0) // 나눗셈 연산에서 두번째 정수에 0이 입력되는 경우 Exception 발생
+                    throw new BadDivideException();
                 res = OperatorType.DIVIDE.operate(firstReal, secondReal);
                 break;
             case '%':
